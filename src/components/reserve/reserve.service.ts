@@ -43,6 +43,14 @@ export class ReserveService {
   }
 
   addReserve(data: AddReserveState) {
+    const check = this.reserve.find(
+      (item) => item.date === data.date && item.tableID === data.tableID,
+    );
+
+    if (check) {
+      return 'This table is already reserved';
+    }
+
     const dataCreate: ReserveState = {
       ...data,
       id: uuidv4(),

@@ -22,7 +22,4 @@ export class UpdateReserveDTO implements UpdateReserveState {
   @IsString()
   @IsNotEmpty()
   readonly phone: string;
-  @IsString()
-  @IsNotEmpty()
-  readonly date: string;
 }

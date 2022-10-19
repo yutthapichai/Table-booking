@@ -4,6 +4,6 @@ import { ReserveController } from './reserve.controller';
 
 @Module({
   providers: [ReserveService],
-  controllers: [ReserveController]
+  controllers: [ReserveController],
 })
 export class ReserveModule {}

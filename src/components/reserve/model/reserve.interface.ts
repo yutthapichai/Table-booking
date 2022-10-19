@@ -16,5 +16,4 @@ export interface AddReserveState {
 export interface UpdateReserveState {
   name: string;
   phone: string;
-  date: string;
 }

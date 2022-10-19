@@ -6,10 +6,60 @@ import {
   UpdateTableState,
 } from './model/table.interface';
 import { v4 as uuidv4 } from 'uuid';
+import * as fs from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class TableService {
   tables: tableState[] = [];
+
+  constructor() {
+    this.generateTable();
+    console.log(this.tables.length);
+  }
+
+  generateTable() {
+    if (!this.tables.length) {
+      try {
+        const tableData = fs.readFileSync(
+          join(__dirname + '../../../../' + 'tableFake.json'),
+        );
+        this.tables = JSON.parse(tableData.toString()).tables;
+      } catch (error) {
+        const fakeTables = this.generateFakeData();
+        this.tables = fakeTables;
+        const data = JSON.stringify({
+          tables: fakeTables,
+        });
+        fs.writeFileSync(
+          join(__dirname + '../../../../' + 'tableFake.json'),
+          data,
+        );
+      }
+    }
+  }
+
+  generateFakeData() {
+    const fakeData = [];
+    for (let i = 0; i < 100; i++) {
+      const name = `Table ${i}`;
+      const chairs = Math.floor(Math.random() * 6) + 2;
+      const location = ['หน้าบ้าน', 'ด้านใน', 'บาร์', 'ริมน้ำ', 'ระเบียง'][
+        Math.floor(Math.random() * 5)
+      ];
+      fakeData.push({
+        name: name,
+        capacity: chairs,
+        isAvailable: true,
+        location: location,
+        id: uuidv4(),
+        active: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      });
+    }
+    return fakeData;
+  }
 
   fetchTable(query) {
     const pageSize = +query.pagesize;
