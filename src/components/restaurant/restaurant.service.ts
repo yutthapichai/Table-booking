@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DynamicSort } from 'src/utils/dynamicSort';
+import { DynamicSort } from '../../utils/dynamicSort';
 import { RestaurantState } from './model/restaurant.interface';
 import { v4 as uuidv4 } from 'uuid';
 import {

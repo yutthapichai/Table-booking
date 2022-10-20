@@ -76,6 +76,20 @@ export class ReserveController {
     }
   }
 
+  @Delete('/cancel/:id')
+  //   @Roles('2') // 2 is admin role
+  //   @UseGuards(AuthGuard('jwt'), RolesGuard)
+  cancelReserve(@Res() res, @Param('id') reserveID) {
+    try {
+      const result = this.reserveService.cancelReserve(reserveID);
+      res.status(HttpStatus.OK).send({ message: result });
+    } catch (error) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .send({ message: error.toString() });
+    }
+  }
+
   @Delete('/:id')
   //   @Roles('2') // 2 is admin role
   //   @UseGuards(AuthGuard('jwt'), RolesGuard)

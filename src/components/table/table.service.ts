@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DynamicSort } from 'src/utils/dynamicSort';
+import { DynamicSort } from '../../utils/dynamicSort';
 import {
   AddTableState,
   tableState,
@@ -67,9 +67,11 @@ export class TableService {
   }
 
   fetchTable(query) {
-    const pageSize = +query.pagesize;
-    const currentPage = +query.page;
-    const message = query.message;
+    console.log(query);
+    const pageSize = +query.pagesize || 10;
+    const currentPage = +query.page || 1;
+    const message = query.message || 'undefined';
+    const sort = query.sort || 'undefined';
     let sorting;
     let result = this.tables;
 
@@ -79,8 +81,8 @@ export class TableService {
       });
     }
 
-    if (query.sort !== 'undefined') {
-      sorting = DynamicSort(query.sort);
+    if (sort !== 'undefined') {
+      sorting = DynamicSort(sort);
     } else {
       sorting = DynamicSort('-createdAt');
     }

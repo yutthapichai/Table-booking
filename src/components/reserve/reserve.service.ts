@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DynamicSort } from 'src/utils/dynamicSort';
+import { DynamicSort } from '../../utils/dynamicSort';
 import {
   AddReserveState,
   ReserveState,
@@ -11,10 +11,20 @@ import { v4 as uuidv4 } from 'uuid';
 export class ReserveService {
   reserve: ReserveState[] = [];
 
+  constructor() {
+    this.addReserve({
+      name: 'somsak kong',
+      phone: '0812345678',
+      date: '2022-10-20T11:00:00.234Z',
+      tableID: 'c4c3dac7-c7b1-433d-8055-745dca8f595f',
+    });
+  }
+
   fetchReserve(query) {
-    const pageSize = +query.pagesize;
-    const currentPage = +query.page;
-    const message = query.message;
+    const pageSize = +query.pagesize || 10;
+    const currentPage = +query.page || 1;
+    const message = query.message || 'undefined';
+    const sort = query.sort || 'undefined';
     let sorting;
     let result = this.reserve;
 
@@ -24,8 +34,8 @@ export class ReserveService {
       });
     }
 
-    if (query.sort !== 'undefined') {
-      sorting = DynamicSort(query.sort);
+    if (sort !== 'undefined') {
+      sorting = DynamicSort(sort);
     } else {
       sorting = DynamicSort('-createdAt');
     }
@@ -76,5 +86,16 @@ export class ReserveService {
     const index = this.reserve.findIndex((item) => item.id === reserveID);
     this.reserve.splice(index, 1);
     return 'Reserve was deleted';
+  }
+
+  // active = false
+  cancelReserve(reserveID: string) {
+    const index = this.reserve.findIndex((item) => item.id === reserveID);
+    this.reserve[index] = {
+      ...this.reserve[index],
+      active: false,
+      updatedAt: new Date().toISOString(),
+    };
+    return 'Reserve was canceled';
   }
 }

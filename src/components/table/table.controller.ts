@@ -15,7 +15,9 @@ import { TableService } from './table.service';
 
 @Controller('table')
 export class TableController {
-  constructor(private tableService: TableService) {}
+  constructor(private tableService: TableService) {
+    console.log('Table Controller');
+  }
 
   @Get('/')
   //   @UseGuards(AuthGuard('jwt'))

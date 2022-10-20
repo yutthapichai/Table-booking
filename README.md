@@ -83,48 +83,50 @@ $ npm run start:prod
 ## API Working
 
 1. Display a number of tables in the restaurant \
-GET localhost:3000/api/table?pagesize=10&page=1 \
-Or \
+GET localhost:3000/api/table?pagesize=10&page=1 OR \
 Display a number of tables in the restaurant for booking available \
-Query dateTime = '20/10/2022 11:00'
+Query dateTime = '20/10/2022 11:00' \
 GET localhost:3000/api/table?pagesize=10&page=1&dateTime=2022-10-20T11:00:00.234Z \
+### Testing npm run test table.controller.spec.ts \
 
 2. Reserve tables in the restaurant \
 Body { dateTime: '20/10/2022 11:00', amoutParty: 6, name: 'somchai', phone: '0883224534' } \
 POST localhost:3000/api/reserve \
+### Testing npm run test reserve.controller.spec.ts \
 
 3. Cancel the reservation \
-Param id = '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+Param id = '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d' \
 DELETE localhost:3000/api/reserve/:id \
+### Testing npm run test reserve.controller.spec.ts \
 
 ## API
 
-Restaurant \
+Restaurant Booking \
   GET localhost:3000/api/restaurant?pagesize=10&page=1 \
   GET localhost:3000/api/restaurant/:id \
   POST localhost:3000/api/restaurant \
-  PUT localhost:3000/api/restaurant/:id 
-  DELETE localhost:3000/api/restaurant/:id 
+  PUT localhost:3000/api/restaurant/:id  \
+  DELETE localhost:3000/api/restaurant/:id  \
 
-Table \
+Table Booking \
   GET localhost:3000/api/table?pagesize=10&page=1 \
   GET localhost:3000/api/table/:id \
   POST localhost:3000/api/table \
-  PUT localhost:3000/api/table/:id 
-  DELETE localhost:3000/api/table/:id 
+  PUT localhost:3000/api/table/:id \
+  DELETE localhost:3000/api/table/:id \
 
-Reserve \
+Reserve Booking \
   GET localhost:3000/api/reserve?pagesize=10&page=1 \
   GET localhost:3000/api/reserve/:id \
   POST localhost:3000/api/reserve \
-  PUT localhost:3000/api/reserve/:id 
-  DELETE localhost:3000/api/reserve/:id 
+  PUT localhost:3000/api/reserve/:id \
+  DELETE localhost:3000/api/reserve/:id \
 
 
 ## Image
 
  Display online table booking
-![image](https://ibb.co/Pr5Hw4g)
+![image](https://i.ibb.co/j8LXgGD/Screen-Shot-2565-10-20-at-23-35-00.png)
 
 
 
