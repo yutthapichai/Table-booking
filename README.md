@@ -83,21 +83,18 @@ $ npm run start:prod
 ## API Working
 
 1. Display a number of tables in the restaurant \
-GET localhost:3000/api/table?pagesize=10&page=1 OR \
-Display a number of tables in the restaurant for booking available \
-Query dateTime = '20/10/2022 11:00' \
-GET localhost:3000/api/table?pagesize=10&page=1&dateTime=2022-10-20T11:00:00.234Z \
-### Testing npm run test table.controller.spec.ts \
+GET localhost:3000/api/table?pagesize=10&page=1 \
+Testing npm run test table.controller.spec.ts \
 
 2. Reserve tables in the restaurant \
 Body { dateTime: '20/10/2022 11:00', amoutParty: 6, name: 'somchai', phone: '0883224534' } \
 POST localhost:3000/api/reserve \
-### Testing npm run test reserve.controller.spec.ts \
+Testing npm run test reserve.controller.spec.ts \
 
 3. Cancel the reservation \
 Param id = '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d' \
-DELETE localhost:3000/api/reserve/:id \
-### Testing npm run test reserve.controller.spec.ts \
+DELETE localhost:3000/api/reserve/cancel/:id \
+Testing npm run test reserve.controller.spec.ts \
 
 ## API
 
@@ -120,12 +117,13 @@ Reserve Booking \
   GET localhost:3000/api/reserve/:id \
   POST localhost:3000/api/reserve \
   PUT localhost:3000/api/reserve/:id \
+  DELETE localhost:3000/api/reserve/cancel/:id \
   DELETE localhost:3000/api/reserve/:id \
 
 
 ## Image
 
- Display online table booking
+ Display online table booking mockup
 ![image](https://i.ibb.co/j8LXgGD/Screen-Shot-2565-10-20-at-23-35-00.png)
 
 
