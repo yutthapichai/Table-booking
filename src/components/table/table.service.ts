@@ -41,12 +41,17 @@ export class TableService {
 
   generateFakeData() {
     const fakeData = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       const name = `Table ${i}`;
-      const chairs = Math.floor(Math.random() * 6) + 2;
-      const location = ['หน้าบ้าน', 'ด้านใน', 'บาร์', 'ริมน้ำ', 'ระเบียง'][
-        Math.floor(Math.random() * 5)
-      ];
+      const chairs = Math.floor(Math.random() * 5) + 2;
+      const location = [
+        'หน้าบ้าน',
+        'ด้านใน',
+        'บาร์',
+        'ริมน้ำ',
+        'ระเบียง',
+        'หลังคาบ้าน',
+      ][Math.floor(Math.random() * 6)];
       fakeData.push({
         name: name,
         capacity: chairs,

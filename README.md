@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -22,14 +22,50 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## Project 
+Table booking system
+
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Application as the online table booking system for this restaurant
+
 
 ## Installation
 
 ```bash
 $ npm install
+```
+
+## First step
+
+```bash
+# First build the image using the command
+$ docker build -t tablebooking .  
+
+# Show images
+$ docker images
+
+# Start the container and run the image with this command
+$ docker run -d -p 80:3000 --name tablebook tablebooking
+
+# Show container
+$ docker ps
+
+# Show Logs container
+$ docker logs -f --tail 400 tablebook
+
+# Stop container
+$ docker stop tablebook
+
+# Restart container
+$ docker restart tablebook
+
+# stops and removes all running containers
+$ docker rm -f $(docker ps -aq)
+
+# Test API will display Hello World!
+$ http://localhost/api
+
 ```
 
 ## Running the app
@@ -44,30 +80,60 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+## API Working
 
-## Test
+1. Display a number of tables in the restaurant \
+GET localhost:3000/api/table?pagesize=10&page=1 \
+Or \
+Display a number of tables in the restaurant for booking available \
+Query dateTime = '20/10/2022 11:00'
+GET localhost:3000/api/table?pagesize=10&page=1&dateTime=2022-10-20T11:00:00.234Z \
 
-```bash
-# unit tests
-$ npm run test
+2. Reserve tables in the restaurant \
+Body { dateTime: '20/10/2022 11:00', amoutParty: 6, name: 'somchai', phone: '0883224534' } \
+POST localhost:3000/api/reserve \
 
-# e2e tests
-$ npm run test:e2e
+3. Cancel the reservation \
+Param id = '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+DELETE localhost:3000/api/reserve/:id \
 
-# test coverage
-$ npm run test:cov
-```
+## API
+
+Restaurant \
+  GET localhost:3000/api/restaurant?pagesize=10&page=1 \
+  GET localhost:3000/api/restaurant/:id \
+  POST localhost:3000/api/restaurant \
+  PUT localhost:3000/api/restaurant/:id 
+  DELETE localhost:3000/api/restaurant/:id 
+
+Table \
+  GET localhost:3000/api/table?pagesize=10&page=1 \
+  GET localhost:3000/api/table/:id \
+  POST localhost:3000/api/table \
+  PUT localhost:3000/api/table/:id 
+  DELETE localhost:3000/api/table/:id 
+
+Reserve \
+  GET localhost:3000/api/reserve?pagesize=10&page=1 \
+  GET localhost:3000/api/reserve/:id \
+  POST localhost:3000/api/reserve \
+  PUT localhost:3000/api/reserve/:id 
+  DELETE localhost:3000/api/reserve/:id 
+
+
+## Image
+
+ Display online table booking
+![image](https://ibb.co/Pr5Hw4g)
+
+
+
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+https://github.com/yutthapichai/Table-booking
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+App Testing by Yutdev.

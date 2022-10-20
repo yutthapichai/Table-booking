@@ -19,7 +19,7 @@ export class TableController {
 
   @Get('/')
   //   @UseGuards(AuthGuard('jwt'))
-  getRestaurant(@Query() query, @Res() res) {
+  getAllTable(@Query() query, @Res() res) {
     try {
       const result = this.tableService.fetchTable(query);
       res.status(HttpStatus.OK).send(result);
@@ -32,7 +32,7 @@ export class TableController {
 
   @Get('/:id')
   //   @UseGuards(AuthGuard('jwt'))
-  getRestaurantByID(@Param('id') tableID, @Res() res) {
+  getTableByID(@Param('id') tableID, @Res() res) {
     try {
       const result = this.tableService.getTableById(tableID);
       res.status(HttpStatus.OK).send({ data: result });
@@ -46,7 +46,7 @@ export class TableController {
   @Post('/')
   //   @Roles('2') // 2 is admin role
   //   @UseGuards(AuthGuard('jwt'), RolesGuard)
-  createRestaurant(@Res() res, @Body() data: AddTableDTO) {
+  createTable(@Res() res, @Body() data: AddTableDTO) {
     try {
       //data.userID = user.id;
       const result = this.tableService.addTable(data);
@@ -61,11 +61,7 @@ export class TableController {
   @Put('/:id')
   //   @Roles('2') // 2 is admin role
   //   @UseGuards(AuthGuard('jwt'), RolesGuard)
-  editRestaurant(
-    @Res() res,
-    @Param('id') tableID,
-    @Body() data: UpdateTableDTO,
-  ) {
+  editTable(@Res() res, @Param('id') tableID, @Body() data: UpdateTableDTO) {
     try {
       const result = this.tableService.updateTable(tableID, data);
       res.status(HttpStatus.OK).send({ message: result });
@@ -79,7 +75,7 @@ export class TableController {
   @Delete('/:id')
   //   @Roles('2') // 2 is admin role
   //   @UseGuards(AuthGuard('jwt'), RolesGuard)
-  deleteRestaurant(@Res() res, @Param('id') tableID) {
+  deleteTable(@Res() res, @Param('id') tableID) {
     try {
       const result = this.tableService.deleteTable(tableID);
       res.status(HttpStatus.OK).send({ message: result });
