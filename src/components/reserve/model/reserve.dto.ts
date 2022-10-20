@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 import { AddReserveState, UpdateReserveState } from './reserve.interface';
 export class AddReserveDTO implements AddReserveState {
   @IsString()
@@ -13,6 +13,9 @@ export class AddReserveDTO implements AddReserveState {
   @IsString()
   @IsNotEmpty()
   readonly tableID: string;
+  @IsNumber()
+  @IsNotEmpty()
+  readonly numberCustomers: number;
 }
 
 export class UpdateReserveDTO implements UpdateReserveState {

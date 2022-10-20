@@ -84,17 +84,17 @@ $ npm run start:prod
 
 1. Display a number of tables in the restaurant \
 GET localhost:3000/api/table?pagesize=10&page=1 \
-Testing npm run test table.controller.spec.ts \
+Testing npm run test table.controller.spec.ts 
 
 2. Reserve tables in the restaurant \
-Body { dateTime: '20/10/2022 11:00', amoutParty: 6, name: 'somchai', phone: '0883224534' } \
+Body { dateTime: '20/10/2022 11:00', numberCustomers: 4, name: 'somchai', phone: '0883224534' } \
 POST localhost:3000/api/reserve \
-Testing npm run test reserve.controller.spec.ts \
+Testing npm run test reserve.controller.spec.ts 
 
 3. Cancel the reservation \
 Param id = '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d' \
 DELETE localhost:3000/api/reserve/cancel/:id \
-Testing npm run test reserve.controller.spec.ts \
+Testing npm run test reserve.controller.spec.ts 
 
 ## API
 
@@ -103,14 +103,14 @@ Restaurant Booking \
   GET localhost:3000/api/restaurant/:id \
   POST localhost:3000/api/restaurant \
   PUT localhost:3000/api/restaurant/:id  \
-  DELETE localhost:3000/api/restaurant/:id  \
+  DELETE localhost:3000/api/restaurant/:id  
 
 Table Booking \
   GET localhost:3000/api/table?pagesize=10&page=1 \
   GET localhost:3000/api/table/:id \
   POST localhost:3000/api/table \
   PUT localhost:3000/api/table/:id \
-  DELETE localhost:3000/api/table/:id \
+  DELETE localhost:3000/api/table/:id 
 
 Reserve Booking \
   GET localhost:3000/api/reserve?pagesize=10&page=1 \
@@ -118,7 +118,7 @@ Reserve Booking \
   POST localhost:3000/api/reserve \
   PUT localhost:3000/api/reserve/:id \
   DELETE localhost:3000/api/reserve/cancel/:id \
-  DELETE localhost:3000/api/reserve/:id \
+  DELETE localhost:3000/api/reserve/:id 
 
 
 ## Image

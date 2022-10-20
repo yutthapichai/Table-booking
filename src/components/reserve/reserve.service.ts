@@ -15,6 +15,7 @@ export class ReserveService {
     this.addReserve({
       name: 'somsak kong',
       phone: '0812345678',
+      numberCustomers: 4,
       date: '2022-10-20T11:00:00.234Z',
       tableID: 'c4c3dac7-c7b1-433d-8055-745dca8f595f',
     });

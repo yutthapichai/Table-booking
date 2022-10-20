@@ -9,6 +9,7 @@ export interface ReserveState extends AddReserveState {
 export interface AddReserveState {
   name: string;
   phone: string;
+  numberCustomers: number;
   date: string;
   tableID: string;
 }
