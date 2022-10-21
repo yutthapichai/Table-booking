@@ -131,6 +131,9 @@ export class ReserveService {
   // active = false
   cancelReserve(reserveID: string) {
     const index = this.reserve.findIndex((item) => item.id === reserveID);
+    if (index === -1) {
+      throw new Error('Reserve not found');
+    }
     this.reserve[index] = {
       ...this.reserve[index],
       active: false,

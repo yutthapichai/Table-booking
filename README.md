@@ -86,15 +86,58 @@ $ npm run start:prod
 GET localhost:3000/api/table?pagesize=10&page=1 \
 Testing npm run test table.controller.spec.ts 
 
+```json
+{
+    "tables": [
+        {
+            "name": "Table 0",
+            "capacity": 4,
+            "isAvailable": true,
+            "location": "หลังคาบ้าน",
+            "id": "694f4f37-a1e0-4961-847f-320f3bd0916d",
+            "active": true,
+            "createdAt": "2022-10-21T09:49:21.856Z",
+            "updatedAt": "2022-10-21T09:49:21.856Z"
+        },
+    ],
+    "count": 1
+}
+```
+
 2. Reserve tables in the restaurant \
 Body { dateTime: '2022-10-21T09:00:00.000Z', numberCustomers: 4, name: 'somchai', phone: '0883224534' } \
 POST localhost:3000/api/reserve \
 Testing npm run test reserve.controller.spec.ts 
 
+```json
+{
+    "message": "Reserve was created",
+    "data": [
+        {
+            "name": "Golang",
+            "phone": "0812345678",
+            "date": "2022-10-21T10:00:00.000Z",
+            "numberCustomers": 4,
+            "tableID": "694f4f37-a1e0-4961-847f-320f3bd0916d",
+            "id": "0a59c09e-6268-4f98-b288-de835b374083",
+            "active": true,
+            "createdAt": "2022-10-21T13:13:03.510Z",
+            "updatedAt": "2022-10-21T13:13:03.510Z"
+        }
+    ]
+}
+```
+
 3. Cancel the reservation \
 Param id = '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d' \
 DELETE localhost:3000/api/reserve/cancel/:id \
 Testing npm run test reserve.controller.spec.ts 
+
+```json
+{
+    "message": "Reserve was canceled"
+}
+```
 
 ## API
 
