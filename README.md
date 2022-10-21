@@ -87,7 +87,7 @@ GET localhost:3000/api/table?pagesize=10&page=1 \
 Testing npm run test table.controller.spec.ts 
 
 2. Reserve tables in the restaurant \
-Body { dateTime: '20/10/2022 11:00', numberCustomers: 4, name: 'somchai', phone: '0883224534' } \
+Body { dateTime: '2022-10-21T09:00:00.000Z', numberCustomers: 4, name: 'somchai', phone: '0883224534' } \
 POST localhost:3000/api/reserve \
 Testing npm run test reserve.controller.spec.ts 
 
@@ -98,21 +98,21 @@ Testing npm run test reserve.controller.spec.ts
 
 ## API
 
-Restaurant Booking \
+Restaurant \
   GET localhost:3000/api/restaurant?pagesize=10&page=1 \
   GET localhost:3000/api/restaurant/:id \
   POST localhost:3000/api/restaurant \
   PUT localhost:3000/api/restaurant/:id  \
   DELETE localhost:3000/api/restaurant/:id  
 
-Table Booking \
+Table \
   GET localhost:3000/api/table?pagesize=10&page=1 \
   GET localhost:3000/api/table/:id \
   POST localhost:3000/api/table \
   PUT localhost:3000/api/table/:id \
   DELETE localhost:3000/api/table/:id 
 
-Reserve Booking \
+Reserve \
   GET localhost:3000/api/reserve?pagesize=10&page=1 \
   GET localhost:3000/api/reserve/:id \
   POST localhost:3000/api/reserve \

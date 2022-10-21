@@ -6,20 +6,13 @@ import {
   UpdateReserveState,
 } from './model/reserve.interface';
 import { v4 as uuidv4 } from 'uuid';
+import { TableService } from '../table/table.service';
 
 @Injectable()
 export class ReserveService {
   reserve: ReserveState[] = [];
 
-  constructor() {
-    this.addReserve({
-      name: 'somsak kong',
-      phone: '0812345678',
-      numberCustomers: 4,
-      date: '2022-10-20T11:00:00.234Z',
-      tableID: 'c4c3dac7-c7b1-433d-8055-745dca8f595f',
-    });
-  }
+  constructor(private readonly tableService: TableService) {}
 
   fetchReserve(query) {
     const pageSize = +query.pagesize || 10;
@@ -59,7 +52,7 @@ export class ReserveService {
     );
 
     if (check) {
-      return 'This table is already reserved';
+      throw new Error('This table is already reserved');
     }
 
     const dataCreate: ReserveState = {
@@ -70,7 +63,53 @@ export class ReserveService {
       updatedAt: new Date().toISOString(),
     };
     this.reserve.push(dataCreate);
-    return 'Reserve was added';
+    return { message: 'Reserve was created', data: dataCreate };
+  }
+
+  checkTableAvailable(data: AddReserveState) {
+    // 4 is max number of chairs in a table
+    const chairs = 4;
+    const people = data.numberCustomers;
+    if (data.numberCustomers > chairs) {
+      const amoutTable =
+        Math.floor(data.numberCustomers / chairs) +
+        Math.ceil((data.numberCustomers % chairs) * 0.1); // maybe 0 or 1
+      const dateRes = [];
+      for (let i = 1; i <= amoutTable; i++) {
+        if (i * chairs <= people) {
+          data.numberCustomers = chairs;
+          const result = this.reservationByDate(data);
+          dateRes.push(result.data);
+        } else {
+          data.numberCustomers = people % chairs;
+          const result = this.reservationByDate(data);
+          dateRes.push(result.data);
+        }
+      }
+      return { message: 'Reserve was created', data: dateRes };
+    } else {
+      const result = this.reservationByDate(data);
+      return { message: result.message, data: [result.data] };
+    }
+  }
+
+  reservationByDate(data: AddReserveState) {
+    const reserveByDate = this.reserve.filter(
+      (item) => item.date === data.date,
+    );
+    const tableAvailable =
+      this.tableService.joinTableWithReserve(reserveByDate);
+    const FindTable = tableAvailable.find((item) => item.isAvailable === true);
+
+    if (FindTable) {
+      const reuslt = this.addReserve({
+        ...data,
+        tableID: FindTable.id,
+      });
+      return reuslt;
+    } else {
+      throw new Error('No table available');
+    }
   }
 
   updateReserve(reserveID: string, data: UpdateReserveState) {

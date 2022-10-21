@@ -27,8 +27,8 @@ describe('ReserveController', () => {
     const dto: AddReserveState = {
       name: 'somsak kong',
       phone: '0812345678',
-      date: '2022-10-20T11:00:00.234Z',
-      tableID: 'c4c3dac7-c7b1-433d-8055-745dca8f595f',
+      date: '2022-10-21T09:00:00.000Z',
+      numberCustomers: 8,
     };
 
     return request(app.getHttpServer())
@@ -38,12 +38,13 @@ describe('ReserveController', () => {
       .expect('Content-Type', /json/)
       .then((res) => {
         expect(res.body).toEqual({
-          message: 'Reserve was added',
+          message: 'Reserve was created',
+          data: expect.any(Array),
         });
       });
   });
 
-  it('/Fetch all reserve booking (GET)', () => {
+  it('/Cancel reserve booking (GET)', () => {
     return request(app.getHttpServer())
       .delete('/reserve/cancel/c4c3dac7-c7b1-433d-8055-745dca8f595f')
       .expect(200)

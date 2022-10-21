@@ -8,6 +8,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'fs';
 import { join } from 'path';
+import { ReserveState } from '../reserve/model/reserve.interface';
 
 @Injectable()
 export class TableService {
@@ -16,6 +17,22 @@ export class TableService {
   constructor() {
     this.generateTable();
     console.log(this.tables.length);
+  }
+
+  getTable() {
+    return this.tables;
+  }
+
+  joinTableWithReserve(reserve: ReserveState[]) {
+    const table = this.tables.map((item) => {
+      const check = reserve.find((reserve) => reserve.tableID === item.id);
+      if (check) {
+        return { ...item, isAvailable: false };
+      } else {
+        return { ...item, isAvailable: true };
+      }
+    });
+    return table;
   }
 
   generateTable() {
@@ -41,7 +58,7 @@ export class TableService {
 
   generateFakeData() {
     const fakeData = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
       const name = `Table ${i}`;
       const chairs = Math.floor(Math.random() * 5) + 2;
       const location = [

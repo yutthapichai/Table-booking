@@ -11,7 +11,7 @@ export interface AddReserveState {
   phone: string;
   numberCustomers: number;
   date: string;
-  tableID: string;
+  tableID?: string;
 }
 
 export interface UpdateReserveState {

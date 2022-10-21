@@ -49,8 +49,9 @@ export class ReserveController {
   createReserve(@Res() res, @Body() data: AddReserveDTO) {
     try {
       //data.userID = user.id;
-      const result = this.reserveService.addReserve(data);
-      res.status(HttpStatus.CREATED).send({ message: result });
+      data.numberCustomers = Number(data.numberCustomers);
+      const result = this.reserveService.checkTableAvailable(data);
+      res.status(HttpStatus.CREATED).send(result);
     } catch (error) {
       res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
