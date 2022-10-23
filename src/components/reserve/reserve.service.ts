@@ -74,19 +74,17 @@ export class ReserveService {
       const amoutTable =
         Math.floor(data.numberCustomers / chairs) +
         Math.ceil((data.numberCustomers % chairs) * 0.1); // maybe 0 or 1
-      const dateRes = [];
+      const dataRes = [];
       for (let i = 1; i <= amoutTable; i++) {
         if (i * chairs <= people) {
           data.numberCustomers = chairs;
-          const result = this.reservationByDate(data);
-          dateRes.push(result.data);
         } else {
           data.numberCustomers = people % chairs;
-          const result = this.reservationByDate(data);
-          dateRes.push(result.data);
         }
+        const result = this.reservationByDate(data);
+        dataRes.push(result.data);
       }
-      return { message: 'Reserve was created', data: dateRes };
+      return { message: 'Reserve was created', data: dataRes };
     } else {
       const result = this.reservationByDate(data);
       return { message: result.message, data: [result.data] };

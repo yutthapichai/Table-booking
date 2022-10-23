@@ -105,7 +105,7 @@ Testing npm run test table.controller.spec.ts
 ```
 
 2. Reserve tables in the restaurant \
-Body { dateTime: '2022-10-21T09:00:00.000Z', numberCustomers: 4, name: 'somchai', phone: '0883224534' } \
+Body { date: '2022-10-21T09:00:00.000Z', numberCustomers: 4, name: 'somchai', phone: '0883224534' } \
 POST localhost:3000/api/reserve \
 Testing npm run test reserve.controller.spec.ts 
 
